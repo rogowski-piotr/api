@@ -1,5 +1,9 @@
 package com.piotr.api;
 
+
+/**
+ * @JsonObiect represents an object of the server's response
+ */
 public class JsonObiect {
 
     private final String abbreviation;

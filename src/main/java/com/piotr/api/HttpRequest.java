@@ -11,10 +11,19 @@ public class HttpRequest {
 
     String url;
 
+    /**
+     * @param url contains main request URL address
+     */
     HttpRequest(String url) {
         this.url = url;
     }
 
+    /**
+     * @param timezone contains the timezone which time we want to get (postfix of full http request)
+     * @return server's response (date of the current timezone)
+     * @throws IOException when an error occurs on the client's side
+     * @throws HTTPException when the server returns an error code
+     */
     public String request(String timezone) throws IOException, HTTPException {
 
         String urlAddress = this.url + timezone;
@@ -32,6 +41,11 @@ public class HttpRequest {
         } else throw new HTTPException(connection.getResponseCode());
     }
 
+    /**
+     * @return server's response (list of the available timezones)
+     * @throws IOException when an error occurs on the client's side
+     * @throws HTTPException when the server returns an error code
+     */
     public String request() throws IOException, HTTPException {
 
         URL url = new URL(this.url);
