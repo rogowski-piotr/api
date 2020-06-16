@@ -23,18 +23,20 @@ public class ApiApplication {
 			if (timezone.length() == 0) throw new HTTPException(0);
 			String response = r.request(timezone);
 			JsonObiect jsOb = gson.fromJson(response, JsonObiect.class);
-			System.out.println(jsOb.datetime);
+			System.out.println(jsOb.getDatetime());
 
 		} catch (HTTPException ex) {
 
-			try {
-				String response = r.request();
-				List<String> timezones = gson.fromJson(response, new ArrayList<String>().getClass());
-				for (String i : timezones)
-					System.out.println(i);
-			} catch (HTTPException e) {
-				System.out.println("Server connection error http code: " + e.getStatusCode()); }
+				try {
+					String response = r.request();
+					List<String> timezones = gson.fromJson(response, new ArrayList<String>().getClass());
+					System.out.println("\nAvaible time zones:\n");
+					for (String i : timezones)
+						System.out.println(i);
+				} catch (HTTPException e) {
+					System.out.println("Server connection error http code: " + e.getStatusCode()); }
 
-		} catch (IOException exc) { System.out.println(exc.getMessage()); }
+		} catch (IOException exc) {
+			System.out.println(exc.getMessage() + " is not avaible (client error)"); }
 	}
 }
